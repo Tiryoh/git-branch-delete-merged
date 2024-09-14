@@ -12,10 +12,14 @@ go install github.com/nekonenene/git-branch-delete-merged@v1
 
 ### General usage
 
+```sh
+git branch-delete-merged [-v | --version] [--branch-name <branchname>] [--yes] <branchname>
+```
+
 If you want to delete a branch that has merged into the `main` branch:
 
 ```sh
-git-branch-delete-merged --base-branch main
+git branch-delete-merged main
 ```
 
 And if the branch to delete exists, you will get a prompt like this:

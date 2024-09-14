@@ -18,7 +18,7 @@ var params parameters
 var Version = "" // Overwrite when building
 
 func ParseParameters() {
-	flag.StringVar(&params.BaseBranchName, "base-branch", "", "[Required] Base branch name (e.g. main, develop)")
+	flag.StringVar(&params.BaseBranchName, "base-branch", "", "[Option] Base branch name (e.g. main, develop)")
 	flag.BoolVar(&params.AllYesFlag, "yes", false, "[Opiton] Delete all merged branches without confirmation")
 	flag.BoolVar(&params.ShowVersion, "version", false, "[Opiton] Show version")
 	flag.BoolVar(&params.ShowVersion, "v", false, "[Opiton] Shorthand of -version")
@@ -28,8 +28,11 @@ func ParseParameters() {
 		fmt.Println(getVersionString())
 		os.Exit(0)
 	}
+	if len(os.Args) > 1 && os.Args[1] != "" {
+		params.BaseBranchName = os.Args[1]
+	}
 	if params.BaseBranchName == "" {
-		log.Fatalln("-base-branch is required")
+		log.Fatalln("base branch name is required. \n git branch-delete-merged <branchname>")
 	}
 }
 
